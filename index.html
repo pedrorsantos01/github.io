@@ -14,20 +14,22 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f2f5;
+            padding: 20px; /* Adicionado padding para evitar que o conteúdo encoste nas bordas */
+            box-sizing: border-box; /* Garante que o padding não aumente o tamanho total */
         }
 
         h1 {
             color: #333;
-            font-size: 8vw;
+            font-size: 6vw; /* Reduzido o tamanho da fonte */
             font-weight: bold;
-            margin-bottom: 20px;
+            margin-bottom: 10px; /* Reduzido o espaçamento */
             text-align: center;
         }
 
         #contador {
-            font-size: 12rem;
+            font-size: 6rem; /* Reduzido o tamanho da fonte */
             color: #0078FF;
-            margin-bottom: 30px;
+            margin-bottom: 20px; /* Reduzido o espaçamento */
             font-weight: bold;
         }
 
@@ -44,10 +46,9 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            max-width: 900px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Reduzido o tamanho das colunas */
+            gap: 10px; /* Reduzido o espaçamento entre as imagens */
+            max-width: 800px; /* Reduzido o tamanho máximo da galeria */
             width: 100%;
         }
 
@@ -71,11 +72,11 @@
 
     <script>
         function atualizarContador() {
-            const agora = new Date();
-            const dataAlvo = new Date(agora);
-            dataAlvo.setDate(agora.getDate() + 34);
+            const agora = new Date(); // Data e hora atuais
+            const dataAlvo = new Date(agora); // Clona a data atual
+            dataAlvo.setDate(agora.getDate() + 34); // Adiciona 34 dias à data atual
 
-            const diferenca = dataAlvo - agora;
+            const diferenca = dataAlvo - agora; // Diferença em milissegundos
 
             if (diferenca <= 0) {
                 document.getElementById('contador').innerHTML = "⏳ Tempo encerrado!";
@@ -83,10 +84,24 @@
                 return;
             }
 
-            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24)); // Calcula os dias
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // Calcula as horas
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60)); // Calcula os minutos
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000); // Calcula os segundos
 
+            // Formata horas, minutos e segundos para sempre ter dois dígitos
             const horasFormatadas = horas < 10 ? `0${horas}` : horas;
-           
+            const minutosFormatados = minutos < 10 ? `0${minutos}` : minutos;
+            const segundosFormatados = segundos < 10 ? `0${segundos}` : segundos;
+
+            // Atualiza o contador na tela
+            document.getElementById('contador').innerHTML = `${dias}d ${horasFormatadas}h ${minutosFormatados}m ${segundosFormatados}s`;
+
+            // Atualiza o contador a cada segundo
+            setTimeout(atualizarContador, 1000);
+        }
+
+        atualizarContador(); // Inicia o contador
+    </script>
+</body>
+</html>
