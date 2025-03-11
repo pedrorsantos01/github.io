@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador + Galeria de Imagens</title>
+    <title>Contador Preposto</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -14,22 +14,22 @@
             height: 100vh;
             margin: 0;
             background-color: #f0f2f5;
-            padding: 20px; /* Adicionado padding para evitar que o conteúdo encoste nas bordas */
-            box-sizing: border-box; /* Garante que o padding não aumente o tamanho total */
+            padding: 20px;
+            box-sizing: border-box;
         }
 
         h1 {
             color: #333;
-            font-size: 6vw; /* Reduzido o tamanho da fonte */
+            font-size: 6vw;
             font-weight: bold;
-            margin-bottom: 10px; /* Reduzido o espaçamento */
+            margin-bottom: 10px;
             text-align: center;
         }
 
         #contador {
-            font-size: 6rem; /* Reduzido o tamanho da fonte */
+            font-size: 6rem;
             color: #0078FF;
-            margin-bottom: 20px; /* Reduzido o espaçamento */
+            margin-bottom: 20px;
             font-weight: bold;
         }
 
@@ -46,9 +46,9 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Reduzido o tamanho das colunas */
-            gap: 10px; /* Reduzido o espaçamento entre as imagens */
-            max-width: 800px; /* Reduzido o tamanho máximo da galeria */
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            max-width: 800px;
             width: 100%;
         }
 
@@ -57,6 +57,21 @@
             height: auto;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Media Queries para Telas Menores (Celulares) */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 8vw; /* Aumenta o tamanho da fonte em telas pequenas */
+            }
+
+            #contador {
+                font-size: 4rem; /* Reduz o tamanho do contador em telas pequenas */
+            }
+
+            .gallery {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Reduz o tamanho das colunas */
+            }
         }
     </style>
 </head>
@@ -71,11 +86,13 @@
     </div>
 
     <script>
+        // Define a data alvo uma única vez (34 dias a partir de agora)
+        const agora = new Date();
+        const dataAlvo = new Date(agora);
+        dataAlvo.setDate(agora.getDate() + 34);
+
         function atualizarContador() {
             const agora = new Date(); // Data e hora atuais
-            const dataAlvo = new Date(agora); // Clona a data atual
-            dataAlvo.setDate(agora.getDate() + 34); // Adiciona 34 dias à data atual
-
             const diferenca = dataAlvo - agora; // Diferença em milissegundos
 
             if (diferenca <= 0) {
