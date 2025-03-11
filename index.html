@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Em Breve!</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: #1e1e2f;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+        }
+        .container {
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+        }
+        h1 { font-size: 3rem; margin-bottom: 10px; }
+        p { font-size: 1.2rem; margin-bottom: 20px; }
+        .countdown { font-size: 2.5rem; font-weight: bold; color: #ffbe00; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Estamos quase prontos!</h1>
+        <p>Faltam apenas:</p>
+        <div class="countdown" id="countdown"></div>
+    </div>
+
+    <script>
+        function atualizarContador() {
+            const dataAlvo = new Date();
+            dataAlvo.setDate(dataAlvo.getDate() + 34);
+            
+            function calcularTempo() {
+                const agora = new Date().getTime();
+                const diferenca = dataAlvo - agora;
+
+                if (diferenca <= 0) {
+                    document.getElementById("countdown").innerHTML = "00:00:00:00";
+                    return;
+                }
+
+                const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+                const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+                const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+            }
+
+            calcularTempo();
+            setInterval(calcularTempo, 1000);
+        }
+
+        window.onload = atualizarContador;
+    </script>
+</body>
+</html>
