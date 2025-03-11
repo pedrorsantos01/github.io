@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador Preposto</title>
+    <title>Contador + Galeria de Imagens</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -86,10 +86,12 @@
     </div>
 
     <script>
-        // Define a data alvo uma única vez (34 dias a partir de agora)
+        // Define a data alvo como meia-noite do dia atual + 34 dias
         const agora = new Date();
-        const dataAlvo = new Date(agora);
-        dataAlvo.setDate(agora.getDate() + 34);
+        const meiaNoite = new Date(agora);
+        meiaNoite.setHours(0, 0, 0, 0); // Define para meia-noite do dia atual
+        const dataAlvo = new Date(meiaNoite);
+        dataAlvo.setDate(meiaNoite.getDate() + 34); // Adiciona 34 dias à meia-noite
 
         function atualizarContador() {
             const agora = new Date(); // Data e hora atuais
