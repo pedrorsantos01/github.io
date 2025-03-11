@@ -18,9 +18,10 @@
 
         h1 {
             color: #333;
-            font-size: 6rem; /* Aumentado o título */
+            font-size: 8vw; /* Usando vw para ajustar automaticamente a fonte */
             font-weight: bold;
             margin-bottom: 20px;
+            text-align: center;
         }
 
         #contador {
@@ -32,14 +33,15 @@
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta o número de colunas automaticamente */
             gap: 15px;
             max-width: 900px;
             margin-top: 20px;
+            width: 100%;
         }
 
         .gallery img {
-            width: 50%; /* Reduzido para metade do tamanho original */
+            width: 100%; /* Ajuste da largura da imagem */
             height: auto;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -58,36 +60,18 @@
 
     <script>
         function atualizarContador() {
-            // Data de 34 dias à frente
-            const dataAlvo = new Date();
-            dataAlvo.setDate(dataAlvo.getDate() + 34);
-
-            // Data atual
             const agora = new Date();
+            const dataAlvo = new Date(agora);
+            dataAlvo.setDate(agora.getDate() + 34); // Data alvo: 34 dias à frente
 
-            // Calcular a diferença
-            const diferenca = dataAlvo - agora;
+            const diferenca = dataAlvo - agora; // Diferença de tempo entre agora e a data alvo
 
             if (diferenca <= 0) {
                 document.getElementById('contador').innerHTML = "⏳ Tempo encerrado!";
                 return;
             }
 
-            // Calcular dias, horas, minutos e segundos restantes
-            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
-
-            // Exibir o contador
-            document.getElementById('contador').innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
-
-            // Atualizar a cada 1 segundo
-            setTimeout(atualizarContador, 1000);
-        }
-
-        // Iniciar o contador
-        atualizarContador();
-    </script>
-</body>
-</html>
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24)); // Dias restantes
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // Horas restantes
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60)); // Minutos restantes
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000); // Se
