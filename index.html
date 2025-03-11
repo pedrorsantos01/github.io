@@ -18,22 +18,33 @@
 
         h1 {
             color: #333;
-            font-size: 8vw; /* Usando vw para ajustar automaticamente a fonte */
+            font-size: 8vw;
             font-weight: bold;
             margin-bottom: 20px;
             text-align: center;
         }
 
         #contador {
-            font-size: 12rem; /* Aumentado o tamanho do contador */
+            font-size: 12rem;
             color: #0078FF;
             margin-bottom: 30px;
             font-weight: bold;
         }
 
+        #contador.finalizado {
+            color: red;
+            animation: piscar 1s infinite;
+        }
+
+        @keyframes piscar {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta o número de colunas automaticamente */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 15px;
             max-width: 900px;
             margin-top: 20px;
@@ -41,7 +52,7 @@
         }
 
         .gallery img {
-            width: 100%; /* Ajuste da largura da imagem */
+            width: 100%;
             height: auto;
             border-radius: 12px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -49,39 +60,33 @@
     </style>
 </head>
 <body>
-    <h1>Regressiva fim da quarentena!!!</h1>
+    <h1>Regressiva fim da Quarentena!!!</h1>
     <div id="contador"></div>
 
     <div class="gallery">
-        <img src="images/WhatsApp Image 2025-03-11 at 11.34.54.jpeg" alt="Imagem 1">
-        <img src="images/WhatsApp Image 2025-03-11 at 11.34.58.jpeg" alt="Imagem 2">
-        <img src="images/WhatsApp Image 2025-03-11 at 11.34.59.jpeg" alt="Imagem 3">
+        <img src="images/WhatsApp Image 2025-03-11 at 11.34.54.jpeg" alt="Descrição da Imagem 1">
+        <img src="images/WhatsApp Image 2025-03-11 at 11.34.58.jpeg" alt="Descrição da Imagem 2">
+        <img src="images/WhatsApp Image 2025-03-11 at 11.34.59.jpeg" alt="Descrição da Imagem 3">
     </div>
 
     <script>
         function atualizarContador() {
             const agora = new Date();
-            const dataAlvo = new Date(agora); // Clonando a data atual
-            dataAlvo.setDate(agora.getDate() - 34); // Adicionando 34 dias à data atual
+            const dataAlvo = new Date(agora);
+            dataAlvo.setDate(agora.getDate() + 34);
 
-            const diferenca = dataAlvo - agora; // Diferença de tempo entre agora e a data alvo
+            const diferenca = dataAlvo - agora;
 
             if (diferenca <= 0) {
                 document.getElementById('contador').innerHTML = "⏳ Tempo encerrado!";
+                document.getElementById('contador').classList.add('finalizado');
                 return;
             }
 
-            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24)); // Dias restantes
-            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // Horas restantes
-            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60)); // Minutos restantes
-            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000); // Segundos restantes
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
 
-            document.getElementById('contador').innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`; // Atualizar o contador
-
-            setTimeout(atualizarContador, 1000); // Atualizar o contador a cada 1 segundo
-        }
-
-        atualizarContador(); // Iniciar o contador
-    </script>
-</body>
-</html>
+            const horasFormatadas = horas < 10 ? `0${horas}` : horas;
+           
