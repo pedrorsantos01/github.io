@@ -3,64 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Em Breve!</title>
+    <title>Contador + Galeria de Imagens</title>
     <style>
         body {
-            display: flex;
-            height: 100vh;
-            justify-content: center;
-            align-items: center;
-            background-color: #1e1e2f;
-            color: #fff;
             font-family: Arial, sans-serif;
-            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             margin: 0;
+            background-color: #f0f2f5;
         }
-        .container {
-            padding: 20px;
+
+        h1 {
+            color: #333;
+        }
+
+        #contador {
+            font-size: 2rem;
+            color: #0078FF;
+            margin-bottom: 30px;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 900px;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: auto;
             border-radius: 12px;
-            background: rgba(0, 0, 0, 0.7);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        h1 { font-size: 3rem; margin-bottom: 10px; }
-        p { font-size: 1.2rem; margin-bottom: 20px; }
-        .countdown { font-size: 2.5rem; font-weight: bold; color: #ffbe00; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Fim da quarentena!!</h1>
-        <p>Faltam apenas:</p>
-        <div class="countdown" id="countdown"></div>
+    <h1>Regressiva fim da quarentena!!!</h1>
+    <div id="contador"></div>
+
+    <div class="gallery">
+        <img src="images/WhatsApp Image 2025-03-11 at 11.34.54.jpeg" alt="Imagem 1">
+        <img src="images/WhatsApp Image 2025-03-11 at 11.34.58.jpeg" alt="Imagem 2">
+        <img src="images/WhatsApp Image 2025-03-11 at 11.34.59.jpeg" alt="Imagem 3">
+        <img src="images/WhatsApp Image 2025-03-11 at 11.35.06.jpeg" alt="Imagem 4">
+        <img src="images/WhatsApp Image 2025-03-11 at 11.35.06.jpeg" alt="Imagem 5">
     </div>
 
     <script>
         function atualizarContador() {
             const dataAlvo = new Date();
             dataAlvo.setDate(dataAlvo.getDate() + 34);
-            
-            function calcularTempo() {
-                const agora = new Date().getTime();
-                const diferenca = dataAlvo - agora;
 
-                if (diferenca <= 0) {
-                    document.getElementById("countdown").innerHTML = "00:00:00:00";
-                    return;
-                }
+            const agora = new Date();
+            const diferenca = dataAlvo - agora;
 
-                const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-                const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
-                const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
-
-                document.getElementById("countdown").innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+            if (diferenca <= 0) {
+                document.getElementById('contador').innerHTML = "⏳ Tempo encerrado!";
+                return;
             }
 
-            calcularTempo();
-            setInterval(calcularTempo, 1000);
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+            document.getElementById('contador').innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+
+            setTimeout(atualizarContador, 1000);
         }
 
-        window.onload = atualizarContador;
+        atualizarContador();
     </script>
 </body>
 </html>
