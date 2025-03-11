@@ -61,8 +61,8 @@
     <script>
         function atualizarContador() {
             const agora = new Date();
-            const dataAlvo = new Date(agora);
-            dataAlvo.setDate(agora.getDate() + 34); // Data alvo: 34 dias à frente
+            const dataAlvo = new Date(agora); // Clonando a data atual
+            dataAlvo.setDate(agora.getDate() + 34); // Adicionando 34 dias à data atual
 
             const diferenca = dataAlvo - agora; // Diferença de tempo entre agora e a data alvo
 
@@ -74,4 +74,14 @@
             const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24)); // Dias restantes
             const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // Horas restantes
             const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60)); // Minutos restantes
-            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000); // Se
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000); // Segundos restantes
+
+            document.getElementById('contador').innerHTML = `${dias}d ${horas}h ${minutos}m ${segundos}s`; // Atualizar o contador
+
+            setTimeout(atualizarContador, 1000); // Atualizar o contador a cada 1 segundo
+        }
+
+        atualizarContador(); // Iniciar o contador
+    </script>
+</body>
+</html>
