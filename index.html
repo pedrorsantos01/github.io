@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contador Sr. Pelos</title>
+    <title>Contador Dani AI AI</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -76,7 +76,7 @@
     </style>
 </head>
 <body>
-    <h1>Regressiva fim da Quarentena!!!</h1>
+    <h1>Regressiva para o Fim da Quaresma!!!</h1>
     <div id="contador"></div>
 
     <div class="gallery">
@@ -86,19 +86,15 @@
     </div>
 
     <script>
-        // Define a data alvo como meia-noite do dia atual + 34 dias (calculada apenas uma vez)
-        const agora = new Date();
-        const meiaNoite = new Date(agora);
-        meiaNoite.setHours(0, 0, 0, 0); // Define para meia-noite do dia atual
-        const dataAlvo = new Date(meiaNoite);
-        dataAlvo.setDate(meiaNoite.getDate() + 33); // Adiciona 34 dias à meia-noite
+        // Define a data alvo como 17 de abril de 2025, às 00:00:00
+        const dataAlvo = new Date("2025-04-17T00:00:00");
 
         function atualizarContador() {
             const agora = new Date(); // Data e hora atuais
             const diferenca = dataAlvo - agora; // Diferença em milissegundos
 
             if (diferenca <= 0) {
-                document.getElementById('contador').innerHTML = "⏳ Tempo encerrado! Chupa Petite";
+                document.getElementById('contador').innerHTML = "⏳ Tempo encerrado Chupa Petite!";
                 document.getElementById('contador').classList.add('finalizado');
                 return;
             }
